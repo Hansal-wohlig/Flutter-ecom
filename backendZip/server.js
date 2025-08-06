@@ -22,38 +22,13 @@ app.use(express.json());
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    // Allow any localhost origin for development
-    if (origin && (origin.startsWith('http://localhost:') || origin.startsWith('https://localhost:'))) {
-      return callback(null, true);
-    }
-    
-    // Allow your production frontend domain (update this with your actual domain)
-    const allowedOrigins = [
-      'https://your-flutter-app.netlify.app',
-      'https://your-flutter-app.vercel.app',
-      'https://your-custom-domain.com'
-    ];
-    
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    
-    // For development, allow all origins (remove this in production if needed)
-    if (process.env.NODE_ENV !== 'production') {
-      return callback(null, true);
-    }
-    
-    // Block other origins
+    if (allowedOrigins.includes(origin)) return callback(null, true);
     callback(new Error('Not allowed by CORS'));
   },
-  credentials: true, // If using cookies, authorization headers, etc.
+  credentials: true,
 };
-
 app.use(cors(corsOptions));
-
 app.use(
   session({
     secret : "secret",
