@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show kIsWeb;
 // ignore: uri_does_not_exist
 import 'cart_screen_web_helper.dart' if (dart.library.html) 'cart_screen_web_helper.dart';
+import '../config.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -57,7 +58,7 @@ class _CartScreenState extends State<CartScreen> {
   if (kIsWeb) {
     // --- WEB: Use Stripe Checkout Session ---
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:5000/api/payments/create-checkout-session'),
+      Uri.parse(AppConfig.stripeCheckoutUrl),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${authProvider.token}',
@@ -90,7 +91,7 @@ class _CartScreenState extends State<CartScreen> {
 
   // --- MOBILE: Use PaymentSheet ---
   final response = await http.post(
-    Uri.parse('http://localhost:5000/api/payments/create-payment-intent'),
+    Uri.parse('http://127.0.0.1:5000/api/payments/create-payment-intent'),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${authProvider.token}',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/auth_provider.dart';
+import '../config.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -60,7 +61,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   // This function for Google login remains unchanged and correct.
   Future<void> _launchGoogleAuth() async {
-    final url = Uri.parse('http://localhost:5000/auth/google');
+    final url = Uri.parse(AppConfig.googleAuthUrl);
     if (await canLaunchUrl(url)) {
       await launchUrl(url, webOnlyWindowName: '_self');
     }

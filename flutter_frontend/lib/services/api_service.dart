@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../config.dart';
 
 class ApiService {
   static Future<http.Response> googleLogin(String idToken) async {
@@ -11,7 +12,7 @@ class ApiService {
     return response;
   }
 
-  static const String baseUrl = 'http://127.0.0.1:5000/api';
+  static const String baseUrl = AppConfig.apiBaseUrl;
   
   static Map<String, String> _getHeaders({String? token}) {
     Map<String, String> headers = {

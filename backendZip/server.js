@@ -82,7 +82,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     //   callbackURL: 'http://localhost:5000'
-      callbackURL: 'http://localhost:5000/auth/google/callback', // This should point to your backend
+      callbackURL: process.env.GOOGLE_CALLBACK_URL, // Use env variable for deployment readiness
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -160,7 +160,7 @@ app.get(
       { expiresIn: '1d' }
     );
     // res.redirect(`http://localhost:3000/`)
-    res.redirect(`http://localhost:3000/google/success?token=${token}&user=${encodeURIComponent(user.email)}`);
+    res.redirect(`${process.env.BASE_URL}/google/success?token=${token}&user=${encodeURIComponent(user.email)}`);
   }
 );
 
