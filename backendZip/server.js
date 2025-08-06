@@ -21,7 +21,8 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = [
   'https://whimsical-shortbread-5ae455.netlify.app',
-  'http://localhost:3000'
+  'http://localhost:3000',
+  'https://willowy-travesseiro-8386fa.netlify.app'
 ];
 
 const corsOptions = {
