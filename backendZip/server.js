@@ -19,6 +19,10 @@ connectDb();
 
 const app = express();
 app.use(express.json());
+const allowedOrigins = [
+  'https://whimsical-shortbread-5ae455.netlify.app',
+  'http://localhost:3000'
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
